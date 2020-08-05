@@ -23,8 +23,11 @@ module.exports = {
   }],
   deploy: {
     production: {
-      user: 'root',
-      host: '1'
+      user: 'root', // 服务器上用户名
+      host: '192.168.56.137', // 服务器host
+      ref: 'origin/master', // git分支（自动化部署，自动远程拉取git仓库到服务器clone下来，后自动安装依赖启动pm2去部署项目）
+      repo: 'https://github.com/ruiahe/web-blog-server.git',
+      'post-deploy': ''
     }
   }
 };
