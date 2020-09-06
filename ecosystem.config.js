@@ -6,7 +6,7 @@ module.exports = {
     instances: 1, // 开启的进程数
     sutorestart: true, // 是否自动重启
     watch: true, // 监听文件变化，自动重启
-    max_memory_restart: '1G', // 设置内存的最大容量
+    max_memory_restart: '1G', // 设置内存的最大容量(超过这个内存最大容量之后会自动重启)
     ignore_watch: [ // 不用监听的文件
       "node_modules",
       "logs"
@@ -21,15 +21,18 @@ module.exports = {
       NODE_ENV: "production"
     }
   }],
-  deploy: {
+  deploy: { //  自动化部署配置
     production: {
-      user: 'root', // 服务器上用户名
-      host: '192.168.56.137', // 服务器host
-      ref: 'origin/master', // git分支（自动化部署，自动远程拉取git仓库到服务器clone下来，后自动安装依赖启动pm2去部署项目）
-      repo: 'https://github.com/ruiahe/web-blog-server.git',
-      path: '/usr/local/myProject', // 服务器上的存放地址
-      ssh_options: 'StrictHostKeyChecking=no',
-      'post-deploy': 'npm install && pm2 reload ecosystem.config.js --env production', // 部署后自动运行的命令
+      user: 'root',
+      host: '192.168.56.142', //  虚拟机ip
+      ref: 'origin/master', //  远程地址分支
+      repo: 'https://github.com/ruiahe/webLogServer.git',  // 远程地址
+      path: '/usr/local/myProject',  //  存放在服务器上的路径
+      ssh_options: 'StrictHostKeyChecking=no',  //  设置是否确认秘钥检测，此处设置为no
+      "post-deploy": 'npm install && pm2 reload ecosystem.config.js --env production', //  部署后，自动运行的命令
+      "env": {
+        "NODE_ENV": "production"
+      }
     }
   }
 };
