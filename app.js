@@ -7,7 +7,7 @@ var cors = require('cors')
 var expressJWT = require('express-jwt') // 解密中间件
 const {PRIVATE_KEY} = require('./utils/constant') // 解密的秘钥
 
-var articleRouter = require('./routes/article');
+var articleRouter = require('./routes/article1');
 var usersRouter = require('./routes/users'); 
 
 var app = express();
