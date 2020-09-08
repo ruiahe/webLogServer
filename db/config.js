@@ -11,7 +11,7 @@ let dbOption
 
 dbOption = {
   connectionLimit: 10,
-  host: '192.168.56.142',
+  host: '192.168.56.143',
   user: 'root',
   password: 'zr261823811111/',
   port: '3306',
