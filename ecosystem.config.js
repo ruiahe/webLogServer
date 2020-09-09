@@ -29,7 +29,6 @@ module.exports = {
       repo: 'https://github.com/ruiahe/webLogServer.git',  // 远程地址
       path: '/usr/local/myProject',  //  存放在服务器上的路径
       ssh_options: 'StrictHostKeyChecking=no',  //  设置是否确认秘钥检测，此处设置为no
-      "pre-deploy": 'git fetch',
       "post-deploy": 'npm install && pm2 reload ecosystem.config.js --env production', //  部署后，自动运行的命令
       "env": {
         "NODE_ENV": "production"
