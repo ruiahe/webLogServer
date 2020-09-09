@@ -24,7 +24,7 @@ module.exports = {
   deploy: { //  自动化部署配置
     production: {
       user: 'root',
-      host: '192.168.56.143', //  虚拟机ip
+      host: '192.168.56.144', //  虚拟机ip
       ref: 'origin/master', //  远程地址分支
       repo: 'https://github.com/ruiahe/webLogServer.git',  // 远程地址
       path: '/usr/local/myProject',  //  存放在服务器上的路径
