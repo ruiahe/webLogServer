@@ -1,10 +1,9 @@
 var express = require('express');
 var router = express.Router();
 const querySql = require('../db/index.js')
-const {PWD_SALT, PRIVATE_KEY, EXPIRESD} = require('../utils/constant')
+const {PWD_SALT, PRIVATE_KEY, EXPIRESD, requestUrl} = require('../utils/constant')
 const {md5, upload} = require('../utils/index')
 const jwt = require('jsonwebtoken')
-const multer = require('multer') // 文件上传中间件
 
 /* GET users listing. */
 /*
@@ -17,7 +16,6 @@ router.post('/register', async (req, res, next) => {
     let user = await querySql('select * from users where username = ?', [username])
     if (!user || user.length === 0){
       password = md5(`${password}${PWD_SALT}`)
-      console.log(password)
       await querySql('insert into users(username, password, nickname) value(?,?,?)', [username, password, nickname])
       res.send({code: 0, msg: '注册成功！'})
     } else {
@@ -70,7 +68,7 @@ router.get('/info', async (req, res, next) => {
 router.post('/upload', upload.single('head_img'), async (req, res, next) => {
   console.log(req.file)
   let imgPath = req.file.path.split('public')[1]
-  let imgUrl = 'http://127.0.0.1:3000'+imgPath
+  let imgUrl = requestUrl+imgPath
   res.send({code: 0, msg: '上传成功', data: imgUrl})
 })
 /*
